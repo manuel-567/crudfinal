@@ -3,20 +3,30 @@
         <title>Django Girls blog</title>
     </head>
     <body>
-        <div>
-            <h1><a href="">Django Girls Blog</a></h1>
-        </div>
+          <div>
+              <h1><a href="/"></a></h1>
+          </div>
 
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">My first post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        </div>
+          {% for post in posts %}
+              <div>
+                  <p>
+                  <h2><a href="">{{ post.Nombre_Foto }}</a></h2>
+                  </p>
+                  <img src="/media/{{ post.Archivo_Foto }}" width="450px" heigth="450px"/>
+                  <br>
+                  published: {{ post.Fecha_Foto }}
+                  <p>
+                  {{ post.Descripcion_Foto|linebreaksbr }}
+                  </p>
+                  {{ post.categoria }}
+                  <br>
+                  {{ post.Autor_Foto}}
+                  <br>
 
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">My second post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
-        </div>
-    </body>
+
+
+
+              </div>
+          {% endfor %}
+
 </html>

@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils import timezone
 
 
 class Categoria(models.Model):
@@ -17,12 +18,16 @@ class Foto(models.Model):
     Autor_Foto = models.ForeignKey('auth.User')
     Nombre_Foto = models.CharField(max_length=50,default='Sin titulo')
     Descripcion_Foto = models.CharField(max_length=200,blank=True)
-    Fecha_Foto = models.DateField(auto_now_add=True)
-    Archivo_Foto = models.ImageField(upload_to='Fotos/')
+    Fecha_Foto = models.DateTimeField(default=timezone.now)
+    Archivo_Foto = models.ImageField(upload_to='media/Fotos/')
     categoria = models.ManyToManyField(Categoria,blank=True)
     ##categoria = models.ForeignKey(Categoria, null=True, blank=True,on_delete=models.CASCADE)
     ##categoria = models.ManyToManyField(Categoria, null=True, blank=True,on_delete=models.CASCADE)
     ##nombre = models.ManyToManyField(Categoria,null=True,blank=True)
+    def publish(self):
+        self.Fecha_Foto = timezone.now()
+        self.save()
+
     def __str__(self):
         return self.Nombre_Foto
 
