@@ -7,6 +7,7 @@
                     {{ post.Fecha_Foto }}
                 </div>
             {% endif %}
+            <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
             <h1>{{ post.Nombre_Foto }}</h1>
             <img src="/media/{{ post.Archivo_Foto }}" width="450px" heigth="450px"/>
             <p>Descripcion: <br>{{ post.Descripcion_Foto|linebreaksbr }}</p>

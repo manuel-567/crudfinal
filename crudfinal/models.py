@@ -16,14 +16,12 @@ class Categoria(models.Model):
 class Foto(models.Model):
     """ Fotos del album """
     Autor_Foto = models.ForeignKey('auth.User')
-    Nombre_Foto = models.CharField(max_length=50,default='Sin titulo')
+    Nombre_Foto = models.CharField(max_length=50,default='Sin nombre')
     Descripcion_Foto = models.CharField(max_length=200,blank=True)
     Fecha_Foto = models.DateTimeField(default=timezone.now)
     Archivo_Foto = models.ImageField(upload_to='media/Fotos/')
     categoria = models.ManyToManyField(Categoria,blank=True)
-    ##categoria = models.ForeignKey(Categoria, null=True, blank=True,on_delete=models.CASCADE)
-    ##categoria = models.ManyToManyField(Categoria, null=True, blank=True,on_delete=models.CASCADE)
-    ##nombre = models.ManyToManyField(Categoria,null=True,blank=True)
+
     def publish(self):
         self.Fecha_Foto = timezone.now()
         self.save()
@@ -34,7 +32,7 @@ class Foto(models.Model):
 @receiver(post_delete, sender=Foto)
 def photo_delete(sender, instance, **kwargs):
     """ Borra los ficheros de las fotos que se eliminan. """
-    instance.foto.delete(False)
+    instance.Archivo_Foto.delete(False)
 
 class Puntuacion(models.Model):
     Autor_Puntuacion = models.ForeignKey('auth.User')
@@ -44,4 +42,3 @@ class Puntuacion(models.Model):
 
     def __int__(self):
         return self.Voto_Puntuacion
-##class comentario(models.Model)
