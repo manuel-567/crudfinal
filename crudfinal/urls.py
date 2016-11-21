@@ -2,6 +2,7 @@ from django.conf.urls import url,include
 from . import views
 from django.conf import settings
 
+
 urlpatterns = [
     url(r'^$', views.post_list),
     url(r'^crudfinal/(?P<pk>[0-9]+)/$', views.post_detail),
@@ -9,6 +10,8 @@ urlpatterns = [
     url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),
     url(r'^post/new/$', views.post_new, name='post_new'),
     url(r'^post/(?P<pk>[0-9]+)/edit/$', views.post_edit, name='post_edit'),
+    url(r'^crudfinal/(?P<pk>[0-9]+)/eliminar$', views.post_delete, name='post_delete'),
+
 
 
     #para editar, guardar y eliminar fotos

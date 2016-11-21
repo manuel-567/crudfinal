@@ -5,6 +5,8 @@ from .forms import PostFoto
 from django.shortcuts import redirect
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.http import HttpResponse, HttpResponseRedirect
+from django.views.generic.edit import (CreateView,UpdateView, DeleteView)
+from django.core.urlresolvers import reverse_lazy
 
 
 def post_list(request):
@@ -21,7 +23,7 @@ def post_new(request):
         if form.is_valid():
             instance = form.save(commit = False)
             instance.save()
-            return render(request, 'crudfinal/post_edit.html', {'form': form})
+            return HttpResponseRedirect('/')
     else:
         form = PostFoto()
     return render(request, 'crudfinal/post_edit.html', {'form': form})
@@ -34,3 +36,9 @@ def post_edit(request, pk):
         instance.save()
         return redirect('crudfinal.views.post_detail', pk=instance.pk)
     return render(request, 'crudfinal/post_edit.html', {'form': form})
+
+def post_delete(reques, pk = None):
+    instance = get_object_or_404(Foto, pk=pk)
+    instance.delete()
+    redirect('crudfinal.views.post_delete')
+    return HttpResponseRedirect('/')
