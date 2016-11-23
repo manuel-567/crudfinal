@@ -1,10 +1,10 @@
 from django import forms
-from .models import Foto,Categoria
+from .models import Foto,Categoria,Puntuacion
 
 class PostFoto(forms.ModelForm):
     class Meta:
         model = Foto
-        fields = ('Autor_Foto', 'Nombre_Foto','Descripcion_Foto','Archivo_Foto','Fecha_Foto','categoria')
+        fields = ('Nombre_Foto','Descripcion_Foto','Archivo_Foto','Fecha_Foto','categoria')
 
 def __init__ (self, *args, **kwargs):
         super(FotoForm, self).__init__(*args, **kwargs)
@@ -19,3 +19,8 @@ class PostCategoria(forms.ModelForm):
     class Meta:
         model = Categoria
         fields = ('Nombre_Categoria','Descripcion_Categoria')
+
+#class PostPuntuacion(forms.ModelForm)
+#    class Meta:
+#        model = Puntuacion
+#        fields = ('Autor_Puntuacion','Voto_Puntuacion','Comentario_Puntuacion','foto')

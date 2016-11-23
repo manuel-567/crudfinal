@@ -22,6 +22,7 @@ def post_new(request):
     if request.method == "POST":
         if form.is_valid():
             instance = form.save(commit = False)
+            instance.Autor_Foto = request.user
             instance.save()
             return HttpResponseRedirect('/home')
     else:
@@ -33,6 +34,7 @@ def post_edit(request, pk):
     form = PostFoto(request.POST or None, request.FILES or None , instance = instance)
     if form.is_valid():
         instance = form.save(commit=False)
+        instance.Autor_Foto = request.user
         instance.save()
         return redirect('crudfinal.views.post_detail', pk=instance.pk)
     return render(request, 'crudfinal/post_edit.html', {'form': form})
