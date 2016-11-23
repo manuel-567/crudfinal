@@ -1,5 +1,5 @@
 from django import forms
-from .models import Foto
+from .models import Foto,Categoria
 
 class PostFoto(forms.ModelForm):
     class Meta:
@@ -14,3 +14,8 @@ def __init__ (self, *args, **kwargs):
         self.fields["categoria"].help_text = "Ingrese los Actores que participaron en la película"
 #En este caso le indicamos que nos muestre todos los actores, pero aquí podríamos filtrar datos si fuera necesario
         self.fields["categoria"].queryset = Actor.objects.all()
+
+class PostCategoria(forms.ModelForm):
+    class Meta:
+        model = Categoria
+        fields = ('Nombre_Categoria','Descripcion_Categoria')

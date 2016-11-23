@@ -1,0 +1,21 @@
+{% extends 'crudfinal/base.html' %}
+
+{% block content %}
+
+<a class="btn btn-default" href="/home/listar/categorias/nueva"><span class="glyphicon glyphicon-pencil"></span></a>
+{% for post in posts %}
+<div>
+<p>
+
+<h1><a href="{% url 'crudfinal.views.post_detail_categoria' pk=post.pk %}">{{ post.Nombre_Categoria }}</a></h1>
+
+</p>
+
+<br>
+Descripcion:
+<br> {{ post.Descripcion_Categoria }}
+
+
+</div>
+{% endfor %}
+{% endblock content %}
